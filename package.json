@@ -1,0 +1,33 @@
+{
+  "name": "wechat-cryptor",
+  "version": "0.0.1",
+  "description": "Wechat cryptor service.",
+  "main": "index.js",
+  "devDependencies": {
+    "babel": "^5.8.20",
+    "chai": "^3.2.0"
+  },
+  "scripts": {
+    "compile": "babel --modules common -d lib/ src/",
+    "compile-test": "babel --modules common -d test/ spec/",
+    "build": "npm run clean && npm run compile && npm run compile-test",
+    "clean": "rm -rf lib test",
+    "test": "mocha test/*.test.js",
+    "watch-src": "babel src -w -d lib",
+    "watch-test": "babel spec -w -d test",
+    "watch": "npm run watch-src & npm run watch-test"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "keywords": [
+    "wechat"
+  ],
+  "author": "lynweklm@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "config": "^1.15.0",
+    "request": "^2.60.0",
+    "thenjs": "^2.0.0"
+  }
+}
