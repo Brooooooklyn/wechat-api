@@ -1,5 +1,5 @@
 {
-  "name": "wechat-cryptor",
+  "name": "wechat-enterprise-sdk",
   "version": "0.0.2",
   "description": "Wechat cryptor service.",
   "main": "index.js",
