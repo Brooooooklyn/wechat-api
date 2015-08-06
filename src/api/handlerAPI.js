@@ -10,16 +10,17 @@ var corpid = config.ENTERPRISE_WECHAT.corpid;
 
 var crypt = new WxCrypt(corpid, token, encodingAesKey);
 var xmlBuilder = new xml.Builder();
+var parser = new xml.Parser();
 var parseString = (xml) => {
   return Thenjs((next) => {
-    xml.parseString(xml, (err, result) => {
+    parser.parseString(xml, (err, result) => {
       if(err) {
         return next('err' ,err);
       }
       return next(null, result);
     });
   })
-  .fail((err, next) => {
+  .fail((next, err) => {
     return next(null, err);
   });
 };
@@ -28,7 +29,7 @@ var handlerResult = (result, next) => {
   if(!result.xml || !result.xml.Encrypt || !result.xml.ToUserName) {
     return next(ErrorCode('ParseXmlError'));
   }
-  var encrypt = result.xml.encrypt;
+  var encrypt = result.xml.Encrypt[0];
   next(null, encrypt);
 };
 
@@ -135,7 +136,8 @@ var handlerAPI = {
         handlerResult(result, next2);
       })
       .then((next2, encrypt) => {
-        var sha1 = crypt.getSHA1(token, timestamp, nonce, encrypt);
+
+        var sha1 = crypt.getSHA1(timestamp, nonce, encrypt);
         var ret = sha1[0];
         if(ret) {
           return cont(ret);
@@ -144,16 +146,12 @@ var handlerAPI = {
         if(signature !== msgSignature) {
           return next(ErrorCode('ValidateSignatureError'));
         }
-        var result = crypt.decrypt(encrypt, corpid);
-        ret = result[0];
-        if(ret) {
-          return next(ret);
-        }
-        var msg = result[1];
+        var result = crypt.decrypt(encrypt);
+        var msg = result.message;
         return next([ErrorCode('OK'), msg]);
       })
     })
-    .fail((err, next) => {
+    .fail((next, err) => {
       next(null, err);
     });
   }

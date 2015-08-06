@@ -164,7 +164,7 @@ var msgAPI = {
         getResponse(err, body, next);
       });
     })
-    .fail((err, next) => {
+    .fail((next, err) => {
       next(null, err);
     });
   },
@@ -193,7 +193,7 @@ var msgAPI = {
         getResponse(err, body, next);
       });
     })
-    .fail((err, next) => {
+    .fail((next, err) => {
       next(null, next);
     });
   },
@@ -227,7 +227,7 @@ var msgAPI = {
         getResponse(err, body, next);
       });
     })
-    .fail((err, next) => {
+    .fail((next, err) => {
       next(null, err);
     });
   }
