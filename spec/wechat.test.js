@@ -149,7 +149,7 @@ describe('wechat api test', () => {
     handlerAPI.decryptMsg(signature, timestamp, nonce, xml)
     .then((next, result) => {
       expect(result[0]).to.equal(0);
-      expect(result[1]).to.be.a('string');
+      expect(result[1]).to.be.a('object');
       done();
     });
   });

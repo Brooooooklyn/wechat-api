@@ -25,6 +25,35 @@ var parseString = (xml) => {
   });
 };
 
+var prepareMessage = (message) => {
+  var xml = message.xml;
+  xml.AgentType = xml.AgentType[0];
+  xml.PackageId = xml.PackageId[0];
+  xml.ToUserName = xml.ToUserName[0];
+  xml.ItemCount = xml.ItemCount[0];
+  var items = xml.Item;
+  var parsedItems = [];
+  var item;
+  var Receiver = {
+    'Type': '',
+    'Id': ''
+  };
+  for (let i = 0; i < items.length; i++) {
+    item = items[i];
+    item.FromUserName = item.FromUserName[0];
+    item.CreateTime = item.CreateTime[0];
+    item.Content = item.Content[0];
+    item.MsgId = item.MsgId[0];
+    item.MsgType = item.MsgType[0];
+    Receiver.Type = item.Receiver[0].Type[0];
+    Receiver.Id = item.Receiver[0].Id[0];
+    item.Receiver = Receiver;
+    parsedItems.push(item);
+  }
+  xml.Item = parsedItems;
+  return message;
+};
+
 var handlerResult = (result, next) => {
   if(!result.xml || !result.xml.Encrypt || !result.xml.ToUserName) {
     return next(ErrorCode('ParseXmlError'));
@@ -136,7 +165,6 @@ var handlerAPI = {
         handlerResult(result, next2);
       })
       .then((next2, encrypt) => {
-
         var sha1 = crypt.getSHA1(timestamp, nonce, encrypt);
         var ret = sha1[0];
         if(ret) {
@@ -148,8 +176,15 @@ var handlerAPI = {
         }
         var result = crypt.decrypt(encrypt);
         var msg = result.message;
-        return next([ErrorCode('OK'), msg]);
-      })
+        return next(null, msg);
+      });
+    })
+    .then((next, msg) => {
+      parseString(msg)
+      .then((next2, result) => {
+        var message = prepareMessage(result);
+        next(null, [ErrorCode('OK'), message]);
+      });
     })
     .fail((next, err) => {
       next(null, err);
