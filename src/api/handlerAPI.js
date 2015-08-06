@@ -15,7 +15,7 @@ var parseString = (xml) => {
   return Thenjs((next) => {
     parser.parseString(xml, (err, result) => {
       if(err) {
-        return next('err' ,err);
+        return next(err);
       }
       return next(null, result);
     });
@@ -89,7 +89,7 @@ var handlerAPI = {
     }
     var encrypt = result[1];
 
-    var sha1 = crypt.getSHA1(token, timestamp, nonce, encrypt);
+    var sha1 = crypt.getSHA1(timestamp, nonce, encrypt);
     ret = sha1[0];
     if(ret !== 0) {
       return ret;

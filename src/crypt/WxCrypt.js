@@ -1,6 +1,9 @@
 import ErrorCode from './ErrorCode';
 import pkcs7Encoder from './pkcs7Encoder';
 import crypto from 'crypto';
+import xml from 'xml2js';
+
+var parser = new xml.Parser();
 
 /**
  * WxCrypt class
@@ -76,9 +79,10 @@ class WxCrypt{
     // 去除16位随机数
     var content = deciphered.slice(16);
     var length = content.slice(0, 4).readUInt32BE(0);
+    var message = content.slice(4, length + 4).toString();
 
     return {
-      message: content.slice(4, length + 4).toString(),
+      message: message,
       id: content.slice(length + 4).toString()
     };
   }

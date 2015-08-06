@@ -142,10 +142,10 @@ describe('wechat api test', () => {
   });
 
   it('decrypt incoming message should ok', (done) => {
-    var xml = '<xml><Encrypt><![CDATA[t952cOSADWTDow35dMX964MNeM1R6W/7Px2AMLj9ecnZAMY1S6UQbAQDbgHxrKpy7MolGH8vBf1xwaLm2CftyUgYP0BPYBHYO+ZBW1SH40kncsQY9lQs2YVkf1KvEi/vCArFrg5sFLHuzzavKYHDzxw9fBXaDsWhdmcQ+vbJtRbyzBw9RemtHuryTw8nUkF5VK9qOpFxmpqT5zP1Yl/i1FW6xxeRowzMR6sjZ3n9GqPhEiGlhKrDdFSTR+hbTD6OrTJuig2HOv41xPLy3v5yio38WEvsAeAQV1v+e6dxiIOVpnhqj7JFjg8jELZNqCwWpl1nBII0LT6KYtynSB6vQ4Uq3oVtx2r5xqnNxgTURmwp+i/0YoZXFXEf5YbAy12CSMhCXgBK5AM1y5N+q3OvCifI4dKSGDyzIm6czzeDMI4P2JwhU4JXZF8lbac7FT9Jt5Ssnl5F14szWy2q/3D9qosa0KdUrwShOESgjlY9Sm5wfu9MaQo1fThh12UxfTiQKBqvS3Rp5+VfCwJtMj4MPFkEzaJcHog7vny/bpJ//GwM5CTsK4oLAuzrsp4dgpuc5ll3MBa2vMjkHemEqX41MEjFxlH7yh4RwlLD1xsLoDfE72g9OQwmXLHCv47YL4km]]></Encrypt><ToUserName>wx80850b023d7c38d9</ToUserName><AgentID>1</AgentID><AgentType>chat</AgentType></xml>';
-    var signature = 'd6f343a1cde363747568ea5dd7925b3ffa782464';
-    var nonce = '1716459900';
-    var timestamp = '1438845094';
+    var xml = '<xml><Encrypt><![CDATA[TmFvnzxcnaUqDshlyJrBejsbXq2/WNlkOAnW8kizp2o9CsHG5PGGlm8hOtJTM9E7prHijgE8qQPE/zmXmaxVFoPtlpNiEjbR6aAt+mfSfUKgEiwUmKnPQNVsGLTa7iiMPdBTaRiQa2ij7aV0yMjhU4m5EfwI8Wfyrop9LtUkYZCNUKFayB/L8vqaAhv+WPjsi3saiN3IYZaRu0WOyw4jp7MWq8zwlSoN6GdZfpX148AsyQnlQyMOB+5xGrylbX4thuiF3ynoJ6Xl0SARLPVmGnP9TfGuZFCn6EHRDITIiqWyqQjkDVmy9y16oB4uuUex3IBaZ7uLfCOF1aHRl0NOozhbyCx5SFt46PHqmxwQNWFOG7jFppu/5JhbtHtm67G950huaL0aD+stxNImHarlCDEIsSpuTgR9Vd18lUmNwd1+82K/knG9YvfpKLdKhje7DNCDZXN5H9JKBMSY/M9hKqlA1+hZn0BkgXS4NoMRVy7C8YZQ7UPMfTuB0CpmkWPKmPfsrBzMOgqSPpEhhQMXMiKH9W3eOzbTpuLoBtjCDI3JRauPqOuAweW87pSQGIClCG0PsRmhPHrnyP3k6Ht7K8r+IP0ckYvnfLEl1JuEEBFwo6KKODe03DLbAtuZnooN]]></Encrypt><ToUserName>wx80850b023d7c38d9</ToUserName><AgentID>1</AgentID><AgentType>chat</AgentType></xml>';
+    var signature = 'fb66ae72d08ca3571b0251a5f5b02d49e4797a05';
+    var nonce = '951136818';
+    var timestamp = '1438850706';
     handlerAPI.decryptMsg(signature, timestamp, nonce, xml)
     .then((next, result) => {
       expect(result[0]).to.equal(0);
