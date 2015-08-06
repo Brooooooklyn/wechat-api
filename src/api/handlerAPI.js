@@ -42,7 +42,7 @@ var handlerAPI = {
   * @return array               ret: errercode, reply echo str
   */
   verifyURL: (msgSignature, timestamp, nonce, echostr) => {
-    var result = crypt.getSHA1(token, timestamp, nonce, echostr);
+    var result = crypt.getSHA1(timestamp, nonce, echostr);
     var ret = result[0];
 
     if(ret !== 0) {
@@ -54,12 +54,9 @@ var handlerAPI = {
       return ErrorCode('ValidateSignatureError');
     }
 
-    var decrypted = crypt.decrypt(echostr, corpid);
+    var decrypted = crypt.decrypt(echostr);
 
-    if(decrypted[0] !== 0) {
-      return $result[0];
-    }
-    var replyEchoStr = decrypted[1];
+    var replyEchoStr = decrypted.message;
     return [
       ErrorCode('OK'),
       replyEchoStr
