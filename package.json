@@ -28,6 +28,7 @@
   "dependencies": {
     "config": "^1.15.0",
     "request": "^2.60.0",
-    "thenjs": "^2.0.0"
+    "thenjs": "^2.0.0",
+    "xml2js": "^0.4.9"
   }
 }

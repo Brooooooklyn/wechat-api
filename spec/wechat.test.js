@@ -1,6 +1,7 @@
 import basicAPI from '../lib/api/basicAPI';
 import msgAPI from '../lib/api/msgAPI';
 import chai from 'chai';
+import handlerAPI from '../lib/api/handlerAPI';
 
 var expect = chai.expect;
 
