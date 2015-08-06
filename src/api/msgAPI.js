@@ -16,6 +16,11 @@ var msgAPI = {
   * @param  string owner    owner id,企业号通讯录里面设置的id
   * @param  array  userlist 参与群聊的人
   * @return object<Thenjs>  Thenjs对象
+  * @example
+  * {
+  * 	"errcode": "0",
+  * 	"errmsg": "ok"
+  * }
   */
   createChat: (chatid, name, owner, userlist) => {
     return Thenjs((next) => {
@@ -42,10 +47,15 @@ var msgAPI = {
   * 发送信息的接口
   * @param  string sendToId 对个人发送消息就是微信通讯录里面设置的id,群聊则是groupid
   * @param  string senderId ge
-  * @param  string msgType  default.json 中定义的vaild msgtype
-  * @param  string chatType defautl.json 中定义的vaild chattype
+  * @param  string msgType  config.js 中定义的vaild msgtype
+  * @param  string chatType config.js 中定义的vaild chattype
   * @param  string content  text类型的消息是消息体，其它类型的消息是media id
-  * @return object<Thenjs>          Thenjs对象
+  * @return object<Thenjs>
+  * @example
+  * {
+  * 	"errcode": 0,
+  * 	"errmsg": "ok"
+  * }
   */
   sendMsg: (sendToId, senderId, msgType, chatType, content) => {
     var vaildMsgType = config.vaildMsgType;
@@ -89,6 +99,22 @@ var msgAPI = {
     });
   },
 
+ /**
+  * 获取一个会话的详细信息
+  * @param  string chatid 单聊或者群聊
+  * @return object<Thenjs>
+  * @example
+  * {
+  * 	"errcode": 0,
+  *  	"errmsg": "ok",
+  *   "chat_info": {
+  *   	"chatid": "235364212115767297",
+  *    	"name": "企业应用中心",
+  *     "owner": "zhangsan",
+  *     "userlist": ["zhangsan", "lisi", "wangwu"]
+  *    }
+  * }
+  */
   getChat: (chatid) => {
     var getChatUrl;
     return Thenjs((next) => {
@@ -110,7 +136,6 @@ var msgAPI = {
  /**
   * 修改话题
   * @param  object postdata
-  * @example
   * {
   * 	"chatid": "235364212115767297",
   *   "op_user": "lisi",
@@ -120,6 +145,11 @@ var msgAPI = {
   *   "del_user_list": ["zhangsan"] 非必需
   * }
   * @return object<Thenjs>
+  * @example
+  * {
+  * 	"errcode": 0,
+  * 	"errmsg": "ok"
+  * }
   */
   modifyChat: (postdata) => {
     if(!postdata.chatid) {
@@ -149,6 +179,11 @@ var msgAPI = {
   * @param  string chatid 群聊的chat id
   * @param  string userid 企业通讯录里面定义的user id，必需在要退出的群聊中
   * @return object<Thenjs>
+  * @example
+  * {
+  * 	"errcode": 0,
+  * 	"errmsg": "ok"
+  * }
   */
   quitChat: (chatid, userid) => {
     return Thenjs((next) => {
@@ -175,6 +210,11 @@ var msgAPI = {
   * @param  string type   single / group
   * @param  string id     企业通讯录中定义的user id / 群聊 group id,与操作者对话的人或者操作者所在的群聊
   * @return object<Thenjs>
+  * @example
+  * {
+  * 	"errcode": 0,
+  * 	"errmsg": "ok"
+  * }
   */
   clearNotify: (userid, type, id) => {
     return Thenjs((next) => {
@@ -201,7 +241,6 @@ var msgAPI = {
  /**
   * 设置新消息免打扰
   * @param  object userlist
-  * @example
   * {
   * 	'user_mute_list': [
   * 		{
@@ -216,6 +255,12 @@ var msgAPI = {
   * }
   * 默认值为0, 0是关闭,1是打开
   * @return object<Thenjs>
+  * @example
+  * {
+  * 	"errcode": 0,
+  * 	"errmsg": "ok",
+  * 	"invaliduser":["asdfjjj"]
+  * }
   */
   muteChat: (userlist) => {
     return Thenjs((next) => {

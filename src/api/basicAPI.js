@@ -19,11 +19,23 @@ var basicAPI = {
        let token = self.token;
        if(token) {
          let expire = now - token.fetchTime;
-         let result = {
-           access_token: token.access_token,
-           expires_in: expire,
-           fetchTime: now
+         let expiresin = token.expires_in;
+         if(expire < parseInt(expiresin)) {
+           let result = {
+             access_token: token.access_token,
+             expires_in: expiresin,
+             fetchTime: now
+           };
+           return next(null, result);
+         }else {
+           return next();
          }
+       }else {
+         return next();
+       }
+     })
+     .then((next, result) => {
+       if(result) {
          return next(null, result);
        }
        request.get({

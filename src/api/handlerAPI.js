@@ -151,6 +151,31 @@ var handlerAPI = {
   * @param  string nonce        随机字符串
   * @param  string postdata     post 的 xml
   * @return object<Thenjs>
+  * @example
+  * [
+  * 	0,
+  * 	{
+  * 		"xml": {
+  * 			"AgentType":"chat",
+  * 			"ToUserName":"wx80850b023d7c38d9",
+  * 			"ItemCount":"1",
+  * 			"PackageId":"429496798487285866",
+  * 			"Item": [
+  * 				{
+  * 					"FromUserName":"yinan",
+  * 					"CreateTime":"1438850706",
+  * 					"MsgType":"text",
+  * 					"Content":"哈哈哈",
+  * 					"MsgId":"6179816726305163297",
+  * 					"Receiver": {
+  * 						"Type":"single",
+  * 						"Id":"huaqiao"
+  * 					}
+  * 				}
+  * 			]
+  * 		}
+  * 	}
+  * ]
   */
   decryptMsg: (msgSignature, timestamp = null, nonce, postdata) => {
     if(!postdata) {
