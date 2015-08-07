@@ -7,6 +7,8 @@ import utils from '../datatype/utils'
 
 
 var postJson = utils.postJson;
+var getAccessToken = utils.getAccessToken;
+var getResponse = utils.getResponse;
 
 var msgAPI = {
  /**
@@ -279,21 +281,5 @@ var msgAPI = {
 
 
 };
-
-function getAccessToken(next) {
-  basicAPI.getAccessToken()
-  .then((next2, resp) => {
-    var token = resp.access_token;
-    return next(null, token);
-  });
-}
-
-function getResponse(err, body, next) {
-  var bodyError;
-  if(!body || body.errcode) {
-    bodyError = body;
-  }
-  return next(bodyError || err, body);
-}
 
 export default msgAPI;

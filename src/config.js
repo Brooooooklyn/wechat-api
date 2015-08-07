@@ -8,6 +8,10 @@ var config = {
   "clearChatURL": "https://qyapi.weixin.qq.com/cgi-bin/chat/clearnotify",
   "muteChatURL": "https://qyapi.weixin.qq.com/cgi-bin/chat/setmute",
   "mediaURL": "https://qyapi.weixin.qq.com/cgi-bin/media/upload",
+  "createDepartmentURL": "https://qyapi.weixin.qq.com/cgi-bin/department/create",
+  "updateDepartmentURL": "https://qyapi.weixin.qq.com/cgi-bin/department/update",
+  "deleteDepartmentURL": "https://qyapi.weixin.qq.com/cgi-bin/department/delete",
+  "getDepartmentURL": "https://qyapi.weixin.qq.com/cgi-bin/department/list",
   "vaildMsgType": [
     "text",
     "image",
