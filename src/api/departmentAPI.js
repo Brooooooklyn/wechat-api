@@ -35,7 +35,7 @@ var departmentAPI = {
         order: order,
         id: id
       };
-      postJson(posturl, data, (err, body) => {
+      postJson(posturl, postdata, (err, body) => {
         getResponse(err, body, next);
       });
     })
@@ -106,6 +106,11 @@ var departmentAPI = {
     });
   },
 
+ /**
+  * 获取部门信息
+  * @param  number id 部门id
+  * @return object<Thenjs>
+  */
   getDepartment: (id) => {
     return Thenjs((next) => {
       getAccessToken(next);
@@ -125,3 +130,5 @@ var departmentAPI = {
   }
 
 };
+
+export default departmentAPI;

@@ -2,6 +2,7 @@ import basicAPI from '../lib/api/basicAPI';
 import msgAPI from '../lib/api/msgAPI';
 import chai from 'chai';
 import handlerAPI from '../lib/api/handlerAPI';
+import departmentAPI from '../lib/api/departmentAPI';
 
 var expect = chai.expect;
 
@@ -150,6 +151,19 @@ describe('wechat api test', () => {
     .then((next, result) => {
       expect(result[0]).to.equal(0);
       expect(result[1]).to.be.a('object');
+      done();
+    });
+  });
+
+  it('create department shold be ok', (done) => {
+    var name = "搞基部门";
+    var parentid = 1;
+    var order = 0;
+    departmentAPI.createDepartment(name, parentid, order)
+    .then((next, resp) => {
+      expect(resp.errcode).to.equal(0);
+      expect(resp.errmsg).to.equal('created');
+      expect(resp.id).to.be.a('string');
       done();
     });
   });
