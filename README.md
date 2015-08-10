@@ -302,3 +302,45 @@ var handlerAPI = wechat.handlerAPI;
 	expect(result[0]).to.equal(0);
   });
 ```
+
+### membersAPI
+成员/部门管理API
+```
+var membersAPI = wechat.membersAPI;
+```
+
+#### membersAPI.createDepartment
+创建部门
+
+#### membersAPI.updateDepartment
+更新部门信息
+
+#### membersAPI.deleteDepartment
+删除部门，不可删除不为空的部门
+
+#### membersAPI.getDepartment
+获取部门信息
+
+#### membersAPI.createMember
+创建一个成员
+
+#### membersAPI.updateMember
+更新成员信息
+
+#### membersAPI.deleteMember
+删除成员
+
+#### membersAPI.deleteMembers
+批量删除成员
+
+#### membersAPI.getMember
+获取成员详细信息
+
+#### membersAPI.getUserSimplelist
+根据部门id获取部门下所有成员基本信息
+
+#### membersAPI.getUserList
+根据部门id获取部门下所有成员详细信息
+
+#### membersAPI.inviteUser
+向一个成员发送邀请，关注企业微信。优先微信邀请，如果成员信息中weixinid 为空则用邮件邀请，人应该以邮箱也为空则报错
