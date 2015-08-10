@@ -25,6 +25,14 @@
   ],
   "author": "lynweklm@gmail.com",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Brooooooklyn/wechat-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Brooooooklyn/wechat-api/issues"
+  },
+  "homepage": "https://github.com/Brooooooklyn/wechat-api#readme",
   "dependencies": {
     "config": "^1.15.0",
     "request": "^2.60.0",

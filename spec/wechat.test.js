@@ -2,9 +2,11 @@ import basicAPI from '../lib/api/basicAPI';
 import msgAPI from '../lib/api/msgAPI';
 import chai from 'chai';
 import handlerAPI from '../lib/api/handlerAPI';
-import departmentAPI from '../lib/api/departmentAPI';
+import membersAPI from '../lib/api/membersAPI';
 
 var expect = chai.expect;
+
+var departmentId;
 
 describe('wechat api test', () => {
 
@@ -155,15 +157,45 @@ describe('wechat api test', () => {
     });
   });
 
-  it('create department shold be ok', (done) => {
+  it('create department should ok', (done) => {
     var name = "搞基部门";
     var parentid = 1;
     var order = 0;
-    departmentAPI.createDepartment(name, parentid, order)
+    membersAPI.createDepartment(name, parentid, order)
+    .then((next, resp) => {
+      var result = JSON.parse(resp);
+      expect([0, 60008]).to.include(result.errcode);
+      expect(['department existed', 'created']).to.include(result.errmsg);
+      expect(result.id).to.be.a('number');
+      departmentId = result.id;
+      done();
+    });
+  });
+
+  it('update department should ok', (done) => {
+    membersAPI.updateDepartment('银河护卫队', 1, 0, departmentId)
+    .then((next, resp) => {
+      var result = JSON.parse(resp);
+      expect(result.errcode).to.equal(0);
+      expect(result.errmsg).to.equal('updated');
+      done();
+    });
+  });
+
+  it('get department lists should ok', (done) => {
+    membersAPI.getDepartment(1)
+    .then((next, resp) => {
+      expect(resp.errmsg).to.equal('ok');
+      expect(resp.errcode).to.equal(0);
+      done();
+    });
+  });
+
+  it('delete department shold ok', (done) => {
+    membersAPI.deleteDepartment(departmentId)
     .then((next, resp) => {
       expect(resp.errcode).to.equal(0);
-      expect(resp.errmsg).to.equal('created');
-      expect(resp.id).to.be.a('string');
+      expect(resp.errmsg).to.equal('deleted');
       done();
     });
   });

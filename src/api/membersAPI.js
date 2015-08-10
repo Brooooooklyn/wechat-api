@@ -8,7 +8,7 @@ var postJson = utils.postJson;
 var getAccessToken = utils.getAccessToken;
 var getResponse = utils.getResponse;
 
-var departmentAPI = {
+var membersAPI = {
  /**
   * 创建部门
   * @param  string name     部门名称
@@ -69,7 +69,7 @@ var departmentAPI = {
         order: order,
         id: id
       };
-      postJson(posturl, data, (err, body) => {
+      postJson(posturl, postdata, (err, body) => {
         getResponse(err, body, next);
       });
     })
@@ -131,4 +131,4 @@ var departmentAPI = {
 
 };
 
-export default departmentAPI;
+export default membersAPI;
