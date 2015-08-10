@@ -52,6 +52,40 @@ var url = {
   getDepartmentURL: (token, id) => {
     var url = config.getDepartmentURL + '?access_token=' + token + '&id=' + id;
     return url;
+  },
+  createMemberURL: (token) => {
+    var url = config.createMemberURL + '?access_token=' + token;
+    return url;
+  },
+  updateMemberURL: (token) => {
+    var url = config.updateMemberURL + '?access_token=' + token;
+    return url;
+  },
+  deleteMemberURL: (token, id) => {
+    var url = config.deleteMemberURL + '?access_token=' + token + '&userid=' + id;
+    return url;
+  },
+  deleteMembersURL: (token) => {
+    var url = config.deleteMembersURL + '?access_token=' + token;
+    return url;
+  },
+  getMemberURL: (token, id) => {
+    var url = config.getMemberURL + '?access_token=' + token + '&userid=' + id;
+    return url;
+  },
+  getUserSimplelistURL: (token, department, fetchchild = 0, status = 0) => {
+    var url = config.getUserSimplelistURL + '?access_token=' + token + '&department_id=' + department +
+              '&fetch_child=' + fetchchild + '&status=' + status;
+    return url;
+  },
+  getUserListURL: (token, department, fetch_child = 0, status = 0) => {
+    var url = config.getUserListURL + '?access_token=' + token + '&department_id=' + department +
+              '&fetch_child=' + fetchchild + '&status=' + status;
+    return url;
+  },
+  inviteUserURL: (token) => {
+    var url = config.inviteUserURL + '?access_token=' + token;
+    return url;
   }
 };
 
