@@ -1,6 +1,6 @@
 {
   "name": "wechat-enterprise-sdk",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Wechat cryptor service.",
   "main": "index.js",
   "devDependencies": {
