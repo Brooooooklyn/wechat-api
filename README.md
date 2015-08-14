@@ -269,6 +269,7 @@ var handlerAPI = wechat.handlerAPI;
   * @param  string timestamp    默认为null,时间戳
   * @param  string nonce        随机字符串
   * @param  string postdata     post 的 xml
+  * @param  string type         default 'message', 指定要解析的xml类型,如果值不为message则当作event解析
   * @return object<Thenjs>
   * @example
   * [
