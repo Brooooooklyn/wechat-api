@@ -86,6 +86,38 @@ var url = {
   inviteUserURL: (token) => {
     var url = config.inviteUserURL + '?access_token=' + token;
     return url;
+  },
+  getLoginInfoURL: (token) => {
+    var url = config.getAuthURL + '?provider_access_token=' + token;
+    return url;
+  },
+  getPreAuthCodeURL: (token) => {
+    var url = config.getPreAuthCodeURL + '?suite_access_token=' + token;
+    return url;
+  },
+  setSessionInfoURL: (token) => {
+    var url = config.setSessionInfoURL + '?suite_access_token=' + token;
+    return url;
+  },
+  getPermanentCodeURL: (token) => {
+    var url = config.getPermanentCodeURL + '?suite_access_token=' + token;
+    return url;
+  },
+  getAuthInfoURL: (token) => {
+    var url = config.getAuthInfoURL + '?suite_access_token=' + token;
+    return url;
+  },
+  getAgentURL: (token) => {
+    var url = config.getAgentURL + '?suite_access_token=' + token;
+    return url;
+  },
+  setAgentURL: (token) => {
+    var url = config.setAgentURL + '?suite_access_token=' + token;
+    return url;
+  },
+  getCorpTokenURL: (token) => {
+    var url = config.getCorpTokenURL + '?suite_access_token=' + token;
+    return url;
   }
 };
 
