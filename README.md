@@ -22,7 +22,6 @@ npm run watch
 在项目中引入：
 ```
 npm i wechat-enterprise-sdk --save
-npm i config --save
 ```
 然后在项目目录下建立config 目录并且在里面加入default.json
 在default.json中加入
@@ -34,7 +33,12 @@ npm i config --save
     "secret": "your corp secret",
     "token": "your token",
     "EncodingAESKey": "your EncodingAESKey"
-  }
+  },
+  //使用authAPI和suiteAuthAPI 需要填写这个属性，这个2个API供套件提供商使用
+  "PROVIDER": {
+    "corpid": "provider corpid",
+    "providersecret": "provider secret"
+  }"
 }
 
 ```
@@ -345,3 +349,38 @@ var membersAPI = wechat.membersAPI;
 
 #### membersAPI.inviteUser
 向一个成员发送邀请，关注企业微信。优先微信邀请，如果成员信息中weixinid 为空则用邮件邀请，人应该以邮箱也为空则报错
+
+
+### authAPI
+```
+var authAPI = wechat.authAPI;
+```
+
+#### authAPI.getLoginInfo
+获取企业管理员登陆信息
+
+### suiteAuthAPI
+```
+var suiteAuthAPI = new wechat.suiteAuthAPI(suiteid, suitesecret, ticket);
+```
+
+#### suiteAuthAPI.getPreAuthCode
+获取预授权码
+
+#### suiteAuthAPI.getSessionInfo
+设置授权配置
+
+#### suiteAuthAPI.getPermanentCode
+获取企业号的永久授权码
+
+#### suiteAuthAPI.getAuthInfo
+获取企业号的授权信息
+
+#### suiteAuthAPI.getAgent
+获取企业号应用
+
+#### suiteAuthAPI.setAgent
+设置企业号应用
+
+#### suiteAuthAPI.getCorpToken
+获取企业号access_token
