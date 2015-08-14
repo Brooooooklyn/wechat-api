@@ -1,12 +1,7 @@
-import url from '../datatype/url'
-import utils from '../datatype/utils'
+import url from '../datatype/url';
 import config from 'config';
 import request from 'request';
 import Thenjs from 'thenjs';
-
-var postJson = utils.postJson;
-var getAccessToken = utils.getAccessToken;
-var getResponse = utils.getResponse;
 
 var basicAPI = {
   /**

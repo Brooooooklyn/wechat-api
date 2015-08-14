@@ -1,4 +1,4 @@
-import config from '../config';
+import config from 'config';
 import request from 'request';
 import Thenjs from 'thenjs';
 import basicAPI from './basicAPI';
@@ -41,7 +41,7 @@ var authAPI = {
       if(result) {
         return next(null, result);
       }
-      var posturl = config.getProviderTokenURL;
+      var posturl = url.getProviderTokenURL;
       var postdata = {
         "corpid": corpid,
         "provider_secret": providerSecret

@@ -87,6 +87,9 @@ var url = {
     var url = config.inviteUserURL + '?access_token=' + token;
     return url;
   },
+  getProviderTokenURL: () => {
+    return config.getProviderTokenURL;
+  },
   getLoginInfoURL: (token) => {
     var url = config.getAuthURL + '?provider_access_token=' + token;
     return url;
