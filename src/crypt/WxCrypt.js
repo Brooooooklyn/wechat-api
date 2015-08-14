@@ -10,7 +10,7 @@ var parser = new xml.Parser();
  *
  * 微信企业号加解密接口
  */
-class WxCrypt{
+class WxCrypt {
 
  /**
   * 传入企业号后台的token和encodingAESKey

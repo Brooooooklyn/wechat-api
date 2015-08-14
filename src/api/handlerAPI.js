@@ -42,16 +42,29 @@ var prepareMessage = (message) => {
     item = items[i];
     item.FromUserName = item.FromUserName[0];
     item.CreateTime = item.CreateTime[0];
-    item.Content = item.Content[0];
-    item.MsgId = item.MsgId[0];
+    item.Content = item.Content ? item.Content[0] : '';
+    item.MsgId = item.MsgId ? item.MsgId[0] : '';
     item.MsgType = item.MsgType[0];
-    Receiver.Type = item.Receiver[0].Type[0];
-    Receiver.Id = item.Receiver[0].Id[0];
+    item.ChatId = item.ChatId ? item.ChatId[0] : '';
+    Receiver.Type = item.Receiver ? item.Receiver[0].Type[0] : '';
+    Receiver.Id = item.Receiver ? item.Receiver[0].Id[0] : '';
     item.Receiver = Receiver;
     parsedItems.push(item);
   }
   xml.Item = parsedItems;
   return message;
+};
+
+var prepareSuiteMsg = (message) => {
+  var xml = message.xml;
+  var result = {
+    "SuiteId": xml.SuiteId ? xml.SuiteId[0] : '',
+    "SuiteTicket": xml.SuiteTicket ? xml.SuiteTicket[0] : '',
+    "AuthCorpId": xml.AuthCorpId ? xml.AuthCorpId[0]: '',
+    "InfoType": xml.InfoType ? xml.InfoType[0] : '',
+    "TimeStamp": xml.TimeStamp ? xml.TimeStamp[0] : ''
+  };
+  return result;
 };
 
 var handlerResult = (result, next) => {
@@ -177,7 +190,7 @@ var handlerAPI = {
   * 	}
   * ]
   */
-  decryptMsg: (msgSignature, timestamp = null, nonce, postdata) => {
+  decryptMsg: (msgSignature, timestamp, nonce, postdata, type = 'message') => {
     if(!postdata) {
       throw 'Illegal postdata in decryptMsg';
     }
@@ -193,7 +206,7 @@ var handlerAPI = {
         var sha1 = crypt.getSHA1(timestamp, nonce, encrypt);
         var ret = sha1[0];
         if(ret) {
-          return cont(ret);
+          return next(ret);
         }
         var signature = sha1[1];
         if(signature !== msgSignature) {
@@ -207,8 +220,13 @@ var handlerAPI = {
     .then((next, msg) => {
       parseString(msg)
       .then((next2, result) => {
-        var message = prepareMessage(result);
-        next(null, [ErrorCode('OK'), message]);
+        if(type === 'message') {
+          let message = prepareMessage(result);
+          return next(null, [ErrorCode('OK'), message]);
+        } else {
+          let message = prepareSuiteMsg(result);
+          return next(null, message);
+        }
       });
     })
     .fail((next, err) => {

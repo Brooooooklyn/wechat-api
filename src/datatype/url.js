@@ -91,7 +91,7 @@ var url = {
     return config.getProviderTokenURL;
   },
   getLoginInfoURL: (token) => {
-    var url = config.getAuthURL + '?provider_access_token=' + token;
+    var url = config.getLoginInfoURL + '?provider_access_token=' + token;
     return url;
   },
   getPreAuthCodeURL: (token) => {

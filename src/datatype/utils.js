@@ -11,14 +11,6 @@ var utils = {
     });
   },
 
-  getProviderToken: (next) => {
-    authAPI.getProviderToken
-    .then((next2, resp) => {
-      var token = resp.access_token;
-      next(null, token);
-    });
-  },
-
   postJson: (url, postdata, callback) => {
     return request.post({
       url: url,
@@ -28,7 +20,7 @@ var utils = {
       }
     },
     (err, resp, body) => {
-      callback(err, body);
+      callback(err, JSON.parse(body));
     })
   },
 

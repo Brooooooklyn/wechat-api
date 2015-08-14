@@ -37,7 +37,7 @@ class suiteAuthAPI {
         let expiresin = token.expires_in;
         if(expire < parseInt(expiresin)) {
           let result = {
-            access_token: token.access_token,
+            access_token: token.suite_access_token,
             expires_in: expiresin,
             fetchTime: now
           };
@@ -85,8 +85,8 @@ class suiteAuthAPI {
     return Thenjs((next) => {
       self.getSuiteToken()
       .then((next2, resp) => {
-        if(resp.access_token) {
-          return next(null, resp.access_token);
+        if(resp.suite_access_token) {
+          return next(null, resp.suite_access_token);
         }
         return next(resp);
       });
@@ -97,7 +97,7 @@ class suiteAuthAPI {
         "suite_id": self.suiteid
       };
       postJson(posturl, postdata, (err, body) => {
-        body.access_token = token;
+        body.suite_access_token = token;
         getResponse(err, body, next);
       });
     })
@@ -128,7 +128,7 @@ class suiteAuthAPI {
       });
     })
     .then((next, result) => {
-      var posturl = url.setSessionInfoURL(result.access_token);
+      var posturl = url.setSessionInfoURL(result.suite_access_token);
       var postdata = {
         "pre_auth_code": result.pre_auth_code,
         "session_info": {
@@ -202,8 +202,8 @@ class suiteAuthAPI {
     return Thenjs((next) => {
       self.getSuiteToken()
       .then((next2, resp) => {
-        if(resp.access_token) {
-          return next(null, resp.access_token);
+        if(resp.suite_access_token) {
+          return next(null, resp.suite_access_token);
         }
         return next(resp);
       });
@@ -346,8 +346,8 @@ class suiteAuthAPI {
     return Thenjs((next) => {
       self.getSuiteToken()
       .then((next2, resp) => {
-        if(resp.access_token) {
-          return next(null, resp.access_token);
+        if(resp.suite_access_token) {
+          return next(null, resp.suite_access_token);
         }
         return next(resp);
       });
@@ -395,8 +395,8 @@ class suiteAuthAPI {
     return Thenjs((next) => {
       self.getSuiteToken()
       .then((next2, resp) => {
-        if(resp.access_token) {
-          return next(null, resp.access_token);
+        if(resp.suite_access_token) {
+          return next(null, resp.suite_access_token);
         }
         return next(resp);
       });
@@ -433,8 +433,8 @@ class suiteAuthAPI {
     return Thenjs((next) => {
       self.getSuiteToken()
       .then((next2, resp) => {
-        if(resp.access_token) {
-          return next(null, resp.access_token);
+        if(resp.suite_access_token) {
+          return next(null, resp.suite_access_token);
         }
         return next(resp);
       });
@@ -454,8 +454,6 @@ class suiteAuthAPI {
       return next(null, err);
     });
   }
-
-
 
 
 };

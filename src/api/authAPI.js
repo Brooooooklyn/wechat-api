@@ -9,9 +9,7 @@ var corpid = config.PROVIDER.corpid;
 var providerSecret = config.PROVIDER.providersecret;
 
 var postJson = utils.postJson;
-var getAccessToken = utils.getAccessToken;
 var getResponse = utils.getResponse;
-var getProviderToken = utils.getProviderToken;
 
 
 var authAPI = {
@@ -41,7 +39,7 @@ var authAPI = {
       if(result) {
         return next(null, result);
       }
-      var posturl = url.getProviderTokenURL;
+      var posturl = url.getProviderTokenURL();
       var postdata = {
         "corpid": corpid,
         "provider_secret": providerSecret
@@ -55,10 +53,10 @@ var authAPI = {
       },
       (err, resp, body) => {
         var bodyError;
+        var body = JSON.parse(body);
         if(!body || body.errcode) {
           bodyError = body;
-        }
-        if(body.access_token) {
+        }else if(body.access_token) {
           body.fetchTime = + new Date();
           self.token = body;
         }
@@ -110,9 +108,12 @@ var authAPI = {
   * }
   */
   getLoginInfo: (authcode) => {
-    var self = authAPI;
     return Thenjs((next) => {
-      getProviderToken(next);
+      authAPI.getProviderToken()
+      .then((next2, resp) => {
+        var token = resp.provider_access_token;
+        next(null, token);
+      });
     })
     .then((next, token) => {
       var posturl = url.getLoginInfoURL(token);
